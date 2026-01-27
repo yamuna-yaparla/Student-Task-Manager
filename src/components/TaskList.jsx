@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TaskItem from "./TaskItem";
 
 function TaskList() {
   const [tasks, setTasks] = useState([
@@ -15,6 +16,13 @@ function TaskList() {
      setTasks([...tasks, newTask]);
      setNewTask("")
   };
+  const deleteTask = (indexToDelete) => {
+  const updatedTasks = tasks.filter(
+    (_, index) => index !== indexToDelete
+  );
+  setTasks(updatedTasks);
+  };
+ 
 
   return (
     <div>
@@ -26,9 +34,14 @@ function TaskList() {
          <button onClick={addTask}>Add Task</button>
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>{task}</li>
+         <TaskItem
+         key={index}
+          task={task}
+          onDelete={() => deleteTask(index)}
+        />
         ))}
       </ul>
+      
     </div>
   );
 }
