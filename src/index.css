@@ -12,7 +12,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,13 +25,42 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color:aqua;
+  
+}
+.task-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 10px;display: flex;
+  font-size:18px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s ease;
+  background-color: #f9f9f9;
+}
+.task-input{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  width: 76%;
+  font-size: 18px;
+  
+}
+.task-checkbox {
+  transform: scale(1.4);   /* increase size */
+  cursor: pointer;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: red;
 }
 
 button {
@@ -54,6 +82,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,3 +95,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

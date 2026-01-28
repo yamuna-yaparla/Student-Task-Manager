@@ -3,9 +3,9 @@ import TaskItem from "./TaskItem";
 
 function TaskList() {
   const [tasks, setTasks] = useState([
-    "Learn React",
-    "Practice DSA",
-    "Build Projects"
+   {text: "Learn React" , completed:false},
+    {text:"Practice DSA",completed:false},
+    {text:"Build Projects",completed:false}
   ]);
 
   const [newTask , setNewTask]=useState("");
@@ -13,7 +13,7 @@ function TaskList() {
   const addTask = ()=>{
      if (newTask.trim() === "") return;
      
-     setTasks([...tasks, newTask]);
+     setTasks([...tasks, {text:newTask, completed:false}]);
      setNewTask("")
   };
   const deleteTask = (indexToDelete) => {
@@ -22,25 +22,37 @@ function TaskList() {
   );
   setTasks(updatedTasks);
   };
- 
+  const toggleTask = (indexToToggle) => {
+  setTasks(
+    tasks.map((task, index) =>
+      index === indexToToggle
+        ? { ...task, completed: !task.completed }
+        : task
+    )
+  );
+  };
+
 
   return (
     <div>
         <input type= "text" 
+         className="task-input"
          placeholder="Enter new task"
          value={newTask}
          onChange={(e)=>setNewTask(e.target.value)} />
 
-         <button onClick={addTask}>Add Task</button>
-      <ul>
+        <button onClick={addTask}>Add Task</button>
+        <ul>
         {tasks.map((task, index) => (
          <TaskItem
-         key={index}
+          key={index}
           task={task}
           onDelete={() => deleteTask(index)}
-        />
+          onToggle={() => toggleTask(index)}
+          />
         ))}
-      </ul>
+        </ul>
+
       
     </div>
   );
