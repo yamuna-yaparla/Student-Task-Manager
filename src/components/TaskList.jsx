@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import TaskItem from "./TaskItem";
 
 function TaskList() {
-  const [tasks, setTasks] = useState([
-   {text: "Learn React" , completed:false},
-    {text:"Practice DSA",completed:false},
-    {text:"Build Projects",completed:false}
-  ]);
+  const [tasks, setTasks] = useState(() => {
+  const savedTasks = localStorage.getItem("tasks");
+  return savedTasks ? JSON.parse(savedTasks) : [];
+});
 
   const [newTask , setNewTask]=useState("");
+  useEffect(() => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = ()=>{
      if (newTask.trim() === "") return;
