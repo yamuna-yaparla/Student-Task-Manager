@@ -12,6 +12,18 @@ function TaskList() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const[filter,setFilter]=useState("all");
+
+  const filteredTasks = tasks.filter(task=>{
+    if(filter=== "completed") return task.completed;
+    if(filter=== "pending") return !task.completed;
+    if(filter==="all") return tasks;
+  });
+  
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed).length;
+  const pendingTasks = totalTasks - completedTasks;
+
   const addTask = ()=>{
      if (newTask.trim() === "") return;
      
@@ -37,6 +49,11 @@ function TaskList() {
 
   return (
     <div>
+        <div style={{marginBottom:"12px"}} >
+          <strong>Total:</strong>{totalTasks}|{" "}
+          <strong>Completed:</strong>{completedTasks}|{" "}
+          <strong>Pending:</strong>{pendingTasks}
+        </div>
         <input type= "text" 
          className="task-input"
          placeholder="Enter new task"
@@ -44,11 +61,16 @@ function TaskList() {
          onChange={(e)=>setNewTask(e.target.value)} />
 
         <button onClick={addTask}>Add Task</button>
+        <div style={{ marginBottom:"12px"}}>
+          <button onClick={()=>setFilter("all")}>All</button>{" "}
+          <button onClick={()=>setFilter("completed")}>Completed</button>{" "}
+          <button onClick={()=>setFilter("pending")}>Pending</button>
+        </div>
         <ul>
-        {tasks.map((task, index) => (
+        {filteredTasks.map((tasks, index) => (
          <TaskItem
           key={index}
-          task={task}
+          task={tasks}
           onDelete={() => deleteTask(index)}
           onToggle={() => toggleTask(index)}
           />
