@@ -1,5 +1,5 @@
 
-🔗 Live Demo: https://student-task-manager-git-main-yamuna-yaparlas-projects.vercel.app/
+🔗 Live Demo: https://student-task-manager-henna.vercel.app/
 
 # Student Task Manager
 
